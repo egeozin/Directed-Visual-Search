@@ -3,9 +3,9 @@
  % This is an extension to the matlab script generated to import data from 
  % text files.
  
- % Ege Ozgirin, Directed Search Experiment at Sinha Lab, utility code_02 a
+ % Ege Ozgirin, Directed Search Experiment at Sinha Lab, utility code_02a
 
-%% Useful parameters and variables (Ege)
+%% Useful parameters and variables
 
 numSets = 6;
 numIDs = 100;
@@ -16,12 +16,11 @@ GazepointX = [];
 GazepointY = [];
 StimuliID = [];
  
-%% Open the data structures from mat file and concatenate
-
+%% Open the data points from mat file and concatenate
 
 for k = 1:numSets
     
-    fileName = strcat('/Users/egeozin/Desktop/Sinha_Lab/Analysis/8_Yasaman/yasaman', num2str(k), 'CMD.txt');
+    fileName = strcat('/Users/egeozin/Desktop/Sinha_Lab/Analysis/8_{name_here}/{name_here}', num2str(k), 'CMD.txt');
     
     scalaro = (k-1)*numIDs;
 	
@@ -131,6 +130,6 @@ end
         
  myVars = {'Timestamp', 'Fixation', 'GazepointX', 'GazepointY', 'StimuliID'};
  
- matFileName = 'yasaman_selected.mat';
+ matFileName = '{name_here}_selected.mat';
  
  save(matFileName, myVars{:});

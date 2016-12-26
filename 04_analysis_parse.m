@@ -4,8 +4,7 @@
 %% Replace the filename here for each trial set for each person
 
 
-
-filename = 'selected/1_name_selected.mat';
+filename = 'selected/1_{name_selected}.mat';
 myVars = {'Timestamp', 'Fixation', 'GazepointX', 'GazepointY', 'StimuliID'};
 loadVars = load(filename, myVars{:});
 
@@ -14,7 +13,6 @@ targetObjectPositions = load(filename2);
 
 target_obj_posx = targetObjectPositions.TargetObjectPosition;
 target_obj_posx(isnan(target_obj_posx)) = [];
-%disp(target_obj_posx(51));
 
 %% Extract the double arrays (indices start from 1 to 5333)
 
@@ -42,7 +40,7 @@ centers = [638 102.5;781.5 131;902.5 213;984.5 334;1013 477.5;
            371 745;290 622;260.3 478;289.5 334;372 212;493.5 131];
 
 
-%% Data Structures
+%% Features to extract
  % 1)Number of fixations to target array for each trial (an array)
  % 1a) Compute the average for each participant 
  % 2)Distance between successive fixation points for each trial (a matrix)
@@ -58,8 +56,6 @@ centers = [638 102.5;781.5 131;902.5 213;984.5 334;1013 477.5;
  % First fixation is also not counted in the below case. There might not be
  % an argument pointing to whether the first fixation is omittable.
  remDistToTarget = zeros(150, 29); %numSets*numTrials, maxNumOfFix-1 
- %fixDurations = zeros(150, 30); %numSets*numTrials, maxNumOfFix
- %avgNumFixations = 0;
  successTime = zeros(150, 1);
  
  
@@ -118,18 +114,13 @@ centers = [638 102.5;781.5 131;902.5 213;984.5 334;1013 477.5;
         successTargets = [];
         
         for j = 1:size(nodes, 1)
-            %disp(target_XY(2));
-            %disp((nodes(j,2) - target_XY(2)));
-            %disp((((nodes(j,1) - target_XY(1))^2 + (nodes(j,2) - target_XY(2))^2) < tRadius^2));
-            
             if (((nodes(j,1) - target_XY(1))^2 + (nodes(j,2) - target_XY(2))^2) < tRadius^2)
                 successTargets = [successTargets; nodes(j,:)];
             end
-         
         end
         
-        %Another condition to check for success
-        %Details will be provided
+        % Another condition to check for success
+        % Details will be provided
         
         if ~isempty(successTargets)
             
@@ -188,7 +179,7 @@ centers = [638 102.5;781.5 131;902.5 213;984.5 334;1013 477.5;
         
         ide = find(clearXs == successNodes(end, 1));
         
-        % Manipulate the data structures
+        % Manipulate the fields
         
         successiveFix(targetID,1:size(dists, 2)) = dists;
         
@@ -203,8 +194,8 @@ centers = [638 102.5;781.5 131;902.5 213;984.5 334;1013 477.5;
  end
  
 
-%% Save the data structures to mat file
+%% Save the feature into a mat file
 
-save('name_analysis_2.mat','numFixations','successiveFix','avgSuccessiveFix', 'remDistToTarget', 'successTime');
+save('{selected_name}_analysis_2.mat','numFixations','successiveFix','avgSuccessiveFix', 'remDistToTarget', 'successTime');
 
 

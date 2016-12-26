@@ -1,12 +1,11 @@
 
-%Sinha Lab, Directed Search Experiment, Stimuli Design, Ege Ozgirin, Oscar
-%Li, Shreyas Gupta
+%Sinha Laboratory for Vision Research at BCS MIT, Directed Search Experiment, Stimuli Design, Ege Ozgirin
 
 %Equalizing the HSV value of images with the selection below:
 
 %Selection:
 
-img1 = imread('images/a_good_sample_here.jpg');
+img1 = imread('images/{sample_image_here}.jpg');
 hsvImage1 = rgb2hsv(img1);
 V1 = hsvImage1(:,:,3); 
 opaque_idx_img1 = V1 <= 0.98;
